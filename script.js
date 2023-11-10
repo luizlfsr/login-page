@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const submit = document.getElementById('submit');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
 
 
     submit.addEventListener('click', function (event) {
@@ -14,14 +16,18 @@ document.addEventListener('DOMContentLoaded', function () {
             return emailRegex.test(email);
         }
 
+        emailError.textContent = '';
+        passwordError.textContent = '';
 
 
         if (email === '') {
-            document.getElementById('email').style.borderColor = 'red';
-            alert('Por favor, preencha o campo de e-mail!')
+            document.getElementById('email').style.borderColor = '#f75454';
+            emailError.textContent = 'Por favor, preencha o campo de e-mail!'
+            emailError.style.display = 'block'
         } else if (!isValidEmail(email)) {
-            document.getElementById('email').style.borderColor = 'red'
-            alert('Por favor, insira um formato de e-mail valido!')
+            document.getElementById('email').style.borderColor = '#f75454'
+            emailError.textContent = 'Por favor, preencha o campo com um formato de e-mail valido'
+            emailError.style.display = 'block'
         }else {
             document.getElementById('email').style.borderColor = 'rgba(255, 255, 255, .25)'
         }
@@ -30,8 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         /*passowrd verification*/
         if (password  === '') {
-            document.getElementById('password').style.borderColor = 'red'
-            alert('Por favor preencha a senha')
+            document.getElementById('password').style.borderColor = '#f75454'
+            passwordError.textContent = 'Por favor, preencha o campo de senha'
+            passwordError.style.display = 'block'
         } else {
             document.getElementById('password').style.borderColor = 'rgba(255, 255, 255, .25)'
         }
