@@ -29,7 +29,7 @@ body {
     font-size: 30px;
 }
 .input-box input {
-    color: antiquewhite;
+    color: rgb(255, 255, 255);
     background-color: transparent;
     border: none;
     border-bottom: 2px solid rgba(255, 255, 255, .25);
@@ -37,14 +37,14 @@ body {
     transition: .2s ease ;
 }
 input:focus-visible {
-    background-color: rgba(255, 255, 255, .45);
+    background-color: rgba(255, 255, 255, .1);
     border-radius: 5px 5px 0 0;
     border: #fff;
     outline: none;
     border-bottom: 2px solid #fff;
 }
 input::placeholder {
-    color: white;
+    color: #fff;
 }
 .Remember {
     display: flex;
@@ -77,4 +77,16 @@ input::placeholder {
     border-radius: 20px;
     height: 35px;
     cursor: pointer;
+}
+
+.error-message {
+    display: none;
+    font-size: 14px;
+    color: #f75454;
+    margin-top: -30px;
+    margin-bottom: 5px;
+}
+
+.error-message::before {
+    content: '⚠ ';
 }
