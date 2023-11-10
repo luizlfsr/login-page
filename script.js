@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('email').style.borderColor = '#f75454'
             emailError.textContent = 'Por favor, preencha o campo com um formato de e-mail valido'
             emailError.style.display = 'block'
-        }else {
+        } else {
             document.getElementById('email').style.borderColor = 'rgba(2, 255, 25, 1)'
             emailError.style.display = 'none'
             emailError.textContent = '';
@@ -47,14 +47,31 @@ document.addEventListener('DOMContentLoaded', function () {
             passwordError.textContent = 'Por favor, preencha o campo de senha!'
             passwordError.style.display = 'block'
         } else if (!isStrongPassword(password)) {
-            document.getElementById('password').style.borderColor = '#f7545'
-            passwordError.textContent = 'A senha deve conta 8 digito, letras maiusculas e minusculas, números e caracteres especiais'
-        } else if (isStrongPassword && email === '') {
-            passwordError.style.display = 'none'
-            passwordError.textContent = '';
-            emailError.style.display = 'block'
-            emailError.textContent = 'Por favor, preencha o campo de e-mail!';
-        }  else {
+            document.getElementById('password').style.borderColor = '#f75454'
+            let missingRequeriments = [];
+
+            if(!/(?=.*[a-z])/.test(password)) {
+                missingRequeriments.push('letras minúsculas')
+            }
+
+            if(!/(?=.*[A-Z])/.test(password)) {
+                missingRequeriments.push('letras maiúsculas')
+            }
+            
+            if(!/(?=.*[\d])/.test(password)) {
+                missingRequeriments.push('números')
+            }
+
+            if(!/(?=.*[!@#$%^&*])/.test(password)) {
+                missingRequeriments.push('caracteres especiais')
+            }
+
+            if(!/(?=.{8,})/.test(password)) {
+                missingRequeriments.push('oito caracteres')
+            }
+
+            passwordError.textContent = `A senha deve conter ${missingRequeriments.join(', ')}`;
+        } else {
             document.getElementById('password').style.borderColor = 'rgba(2, 255, 25, 1)'
             passwordError.style.display = 'none'
             passwordError.textContent = '';
