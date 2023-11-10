@@ -23,6 +23,7 @@ body {
     padding: 10px 10px 50px 10px;
     text-align: center;
     background-color: rgba(255, 255, 255, .02);
+    box-shadow: 0 0 1em;
 }
 .title {
     margin: 20px 0;
