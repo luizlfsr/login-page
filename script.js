@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submit = document.getElementById('submit');
     const emailError = document.getElementById('email-error');
     const passwordError = document.getElementById('password-error');
+    let missingRequeriments = [];
 
 
     submit.addEventListener('click', function (event) {
@@ -42,39 +43,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         /*passowrd verification*/
-        if (password  === '') {
-            document.getElementById('password').style.borderColor = '#f75454'
-            passwordError.textContent = 'Por favor, preencha o campo de senha!'
-            passwordError.style.display = 'block'
-        } else if (!isStrongPassword(password)) {
-            document.getElementById('password').style.borderColor = '#f75454'
-            let missingRequeriments = [];
-
-            if(!/(?=.*[a-z])/.test(password)) {
-                missingRequeriments.push('letras minúsculas')
-            }
-
-            if(!/(?=.*[A-Z])/.test(password)) {
-                missingRequeriments.push('letras maiúsculas')
-            }
-            
-            if(!/(?=.*[\d])/.test(password)) {
-                missingRequeriments.push('números')
-            }
-
-            if(!/(?=.*[!@#$%^&*])/.test(password)) {
-                missingRequeriments.push('caracteres especiais')
-            }
-
-            if(!/(?=.{8,})/.test(password)) {
-                missingRequeriments.push('oito caracteres')
-            }
-
-            passwordError.textContent = `A senha deve conter ${missingRequeriments.join(', ')}`;
+        
+        if (password === '') {
+            document.getElementById('password').style.borderColor = '#f75454';
+            passwordError.textContent = 'Por favor, preencha o campo de senha!';
+            passwordError.style.display = 'block';
         } else {
-            document.getElementById('password').style.borderColor = 'rgba(2, 255, 25, 1)'
-            passwordError.style.display = 'none'
-            passwordError.textContent = '';
+            // Reset a lista de requisitos ausentes
+            missingRequeriments = [];
+        
+            if (!/(?=.*[a-z])/.test(password)) {
+                missingRequeriments.push('letras minúsculas');
+            }
+        
+            if (!/(?=.*[A-Z])/.test(password)) {
+                missingRequeriments.push('letras maiúsculas');
+            }
+        
+            if (!/(?=.*[\d])/.test(password)) {
+                missingRequeriments.push('números');
+            }
+        
+            if (!/(?=.*[!@#$%^&*])/.test(password)) {
+                missingRequeriments.push('caracteres especiais');
+            }
+        
+            if (password.length < 8) {
+                missingRequeriments.push('oito caracteres');
+            }
+        
+            if (missingRequeriments.length > 0) {
+                document.getElementById('password').style.borderColor = '#f75454';
+                passwordError.textContent = `A senha deve conter ${missingRequeriments.join(', ')}`;
+                passwordError.style.display = 'block';
+            } else {
+                document.getElementById('password').style.borderColor = 'rgba(2, 255, 25, 1)';
+                passwordError.style.display = 'none';
+                passwordError.textContent = '';
+            }
         }
 
 
