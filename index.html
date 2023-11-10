@@ -15,18 +15,18 @@
             <div class="inputs">
                 <div class="input-box">
                     <ion-icon name="mail-outline"></ion-icon>
-                    <input type="email" required placeholder="Exemple@gmail.com">
+                    <input id="email" type="email" required placeholder="Exemple@gmail.com">
                 </div>
                 <div class="input-box">
                     <ion-icon name="lock-closed-outline"></ion-icon>
-                    <input type="password" required placeholder="Password">
+                    <input id="password" type="password" required placeholder="Password">
                 </div>
             </div>
             <div class="buttons">           
                 
                 <div class="Remember"><input id="checkbox" type="checkbox"><label class="label" for="">Remember Me</label></div>
                 <a class=" forget a" href="#">Forget Password?</a>
-                <button class="button">log in</button>
+                <button class="button" id="submit">log in</button>
                 <div class="register">
                     <label for="">Don't have account <a class="a" href="#">register</a></label>
                 </div>
@@ -36,5 +36,6 @@
 
     <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
