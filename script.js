@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailError = document.getElementById('email-error');
     const passwordError = document.getElementById('password-error');
     const storedEmail = localStorage.getItem('email')
-    const storedPassword = localStorage.getItem('password')
     let missingRequeriments = [];
 
     if (storedEmail) {
@@ -11,13 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         email.value = '';
     }
-
-    if (storedPassword) {
-        password.value = storedPassword;
-    } else {
-        password.value = '';
-    }
-
 
     logIn.addEventListener('click', function (event) {
 
@@ -88,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (missingRequeriments.length > 0) {
                 showError(passwordError, `A senha deve conter ${missingRequeriments.join(', ')}`)
             } else {
-                localStorage.setItem('password', password)
                 clearError(passwordError)
             }
         }
