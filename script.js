@@ -1,89 +1,84 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const logIn = document.getElementById('logIn');
-    const emailError = document.getElementById('email-error');
-    const passwordError = document.getElementById('password-error');
+$(document).ready(function () {
+    const emailError = $('#email-error')
+    const passwordError = $('#password-error')
     const storedEmail = localStorage.getItem('email')
-    let missingRequeriments = [];
 
     if (storedEmail) {
-        email.value = storedEmail;
+        $('#email').val(storedEmail)
     } else {
-        email.value = '';
+        $('#email').val('')
     }
 
-    logIn.addEventListener('click', function (event) {
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+    $('#logIn').on('click', function (e) {
+        const email = $('#email').val()
+        const password = $('#password').val()
 
         function showError(element, message) {
-            element.style.borderColor = '#f75454';
-            element.textContent = message;
-            element.style.display = 'block';
+            element.css({'borderColor': '#f75454', 'display': 'block'})
+            element.text(message)
         }
 
         function clearError(element) {
-            element.style.borderColor = 'rgba(2, 255, 25, 1)';
-            element.style.display = 'none'
-            element.textContent = ''
+            element.css({'borderColor': 'rgba(2, 255, 25, 1', 'display': 'none'})
+            element.text('')
         }
 
-
-        /*email verification*/
+        //email verification
         function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            const regexEmial = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regexEmial.test(email)
         }
 
-        emailError.textContent = '';
+        emailError.text('')
 
-        if (email === '') {
+        if(email === '') {
             showError(emailError, 'Preencha o campo de email!')
         } else if (!isValidEmail(email)) {
-            showError(emailError, 'Este email não é valido!')
+            showError(emailError, 'Este email não é válido!')
         } else {
             localStorage.setItem('email', email)
             clearError(emailError)
         }
 
+        //password verification
+        passwordError.text('')
 
-        /*passowrd verification*/
-
-        passwordError.textContent = '';
-        
-        if (password === '') {
-            showError(passwordError, 'preencha o campo de senha!')
+        //verifica se senha vazia
+        if(password === '') {
+            showError(passwordError, 'Preencha o campo de senha!')
         } else {
-            // Reset a lista de requisitos ausentes
-            missingRequeriments = [];
+            //reseta a lista de requisitos ausentes
+            const missingRequirements = []
+
+            //verifica se senha valida
 
             if (!/(?=.*[a-z])/.test(password)) {
-                missingRequeriments.push('letras minúsculas');
-            }
+                missingRequirements.push('letras minúsculas')
+            } 
 
             if (!/(?=.*[A-Z])/.test(password)) {
-                missingRequeriments.push('letras maiúsculas');
+                missingRequirements.push('letras maiúsuclas')
             }
 
             if (!/(?=.*[\d])/.test(password)) {
-                missingRequeriments.push('números');
+                missingRequirements.push('números')
             }
 
             if (!/(?=.*[!@#$%^&*])/.test(password)) {
-                missingRequeriments.push('caracteres especiais');
+                missingRequirements.push('caracteres especiais')
             }
-
+            
             if (password.length < 8) {
-                missingRequeriments.push('oito caracteres');
+                missingRequirements.push('oito caracteres')
             }
-
-            if (missingRequeriments.length > 0) {
-                showError(passwordError, `A senha deve conter ${missingRequeriments.join(', ')}`)
+            
+            if(missingRequirements > 0) {
+                showError(passwordError, `A senha deve conter ${missingRequirements.join(', ')}`)
             } else {
                 clearError(passwordError)
             }
         }
 
-        event.preventDefault();
+        e.preventDefault()
     })
 })
